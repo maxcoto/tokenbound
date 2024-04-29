@@ -28,12 +28,11 @@ abstract contract BatchExecutor is BaseExecutor {
     {
         if (!_isValidExecutor(_msgSender())) revert NotAuthorized();
 
-        _beforeExecute();
-
         uint256 length = operations.length;
         bytes[] memory results = new bytes[](length);
 
         for (uint256 i = 0; i < length; i++) {
+            _beforeExecute(operations[i].to, operations[i].value, operations[i].data, operations[i].operation);
             results[i] = LibExecutor._execute(
                 operations[i].to, operations[i].value, operations[i].data, operations[i].operation
             );

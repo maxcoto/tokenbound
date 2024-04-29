@@ -265,7 +265,7 @@ contract AccountV3 is
      * @dev Called before executing an operation. Reverts if account is locked. Ensures state is
      * updated prior to execution.
      */
-    function _beforeExecute() internal virtual override {
+    function _beforeExecute(address, uint256, bytes memory, uint8) internal virtual override {
         if (isLocked()) revert AccountLocked();
         _updateState();
     }

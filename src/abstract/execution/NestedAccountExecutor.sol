@@ -83,7 +83,7 @@ abstract contract NestedAccountExecutor is BaseExecutor {
 
         if (!_isValidExecutor(current)) revert NotAuthorized();
 
-        _beforeExecute();
+        _beforeExecute(to, value, data, operation);
 
         return LibExecutor._execute(to, value, data, operation);
     }
